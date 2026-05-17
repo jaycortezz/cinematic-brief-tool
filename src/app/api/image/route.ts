@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
       quality: 'medium',
     })
 
-    const b64 = (response.data[0] as { b64_json?: string }).b64_json
+    const b64 = (response.data?.[0] as { b64_json?: string } | undefined)?.b64_json
     if (!b64) throw new Error('No image returned from OpenAI')
 
     return NextResponse.json({ image: b64 })
